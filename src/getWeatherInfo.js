@@ -1,17 +1,18 @@
+import { events } from "./events";
+
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const errorText = document.querySelector(".error-text");
 
-let usefulDataArr = [];
 searchBtn.addEventListener("click", getCityInfo);
 
 async function getCityInfo() {
   if (!checkInput()) return;
   const weatherData = await getWeather(searchInput.value);
   const forecastDaysArr = Array.from(weatherData.forecast.forecastday);
-  usefulDataArr = createUsefulDataArr(
-    forecastDaysArr,
-    weatherData.location.name,
+  events.emit(
+    "newCitySearched",
+    createUsefulDataArr(forecastDaysArr, weatherData.location.name),
   );
 }
 
@@ -53,9 +54,7 @@ function createUsefulDataArr(arr, cityName) {
       chanceOfRain: item.day.daily_chance_of_rain,
       chanceOfSnow: item.day.daily_chance_of_snow,
     };
-    usefulDataArr.push(newObj);
+    dataArr.push(newObj);
   });
   return dataArr;
 }
-
-export { usefulDataArr };
