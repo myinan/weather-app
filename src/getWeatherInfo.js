@@ -1,12 +1,27 @@
-const searchInput = document.querySelector("form > input");
-const searchBtn = document.querySelector("form > button");
+const searchInput = document.querySelector("#search-input");
+const searchBtn = document.querySelector("#search-btn");
+const errorText = document.querySelector(".error-text");
 
-searchBtn.addEventListener("click", searchCity);
+let usefulDataArr = [];
+searchBtn.addEventListener("click", getCityInfo);
 
-async function searchCity() {
+async function getCityInfo() {
+  if (!checkInput()) return;
   const weatherData = await getWeather(searchInput.value);
   const forecastDaysArr = Array.from(weatherData.forecast.forecastday);
-  console.log(createUsefulDataArr(forecastDaysArr));
+  usefulDataArr = createUsefulDataArr(
+    forecastDaysArr,
+    weatherData.location.name,
+  );
+}
+
+function checkInput() {
+  if (!searchInput.value) {
+    errorText.classList.remove("display-none");
+    return false;
+  }
+  errorText.classList.add("display-none");
+  return true;
 }
 
 async function getWeather(location) {
@@ -22,10 +37,11 @@ async function getWeather(location) {
   }
 }
 
-function createUsefulDataArr(arr) {
-  let usefulDataArr = [];
+function createUsefulDataArr(arr, cityName) {
+  let dataArr = [];
   arr.forEach((item) => {
     let newObj = {
+      city: cityName,
       date: item.date,
       avgTempC: item.day.avgtemp_c,
       avgTempF: item.day.avgtemp_f,
@@ -39,5 +55,7 @@ function createUsefulDataArr(arr) {
     };
     usefulDataArr.push(newObj);
   });
-  return usefulDataArr;
+  return dataArr;
 }
+
+export { usefulDataArr };

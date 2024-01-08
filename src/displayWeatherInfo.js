@@ -1,0 +1,1 @@
+import { usefulDataArr } from "./getWeatherInfo";
