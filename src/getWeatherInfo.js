@@ -12,9 +12,18 @@ searchBtn.addEventListener("click", () => {
 });
 
 export async function getCityInfo(city) {
-  const weatherData = await getWeather(city);
-  const cleanedData = createUsefulDataArr(weatherData);
-  events.emit("newCitySearched", cleanedData);
+  showLoading();
+  try {
+    const weatherData = await getWeather(city);
+    const cleanedData = createUsefulDataArr(weatherData);
+    events.emit("newCitySearched", cleanedData);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setTimeout(() => {
+      hideLoading();
+    }, 1500);
+  }
 }
 
 function checkInput() {
@@ -24,6 +33,14 @@ function checkInput() {
   }
   errorText.classList.add("display-none");
   return true;
+}
+
+function showLoading() {
+  document.querySelector("#loading").style.display = "flex";
+}
+
+function hideLoading() {
+  document.querySelector("#loading").style.display = "none";
 }
 
 async function getWeather(location) {
