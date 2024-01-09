@@ -1,4 +1,5 @@
 import { events } from "./events";
+import { format, parse } from "date-fns";
 import "./getWeatherInfo.css";
 
 const searchInput = document.querySelector("#search-input");
@@ -12,11 +13,8 @@ searchBtn.addEventListener("click", () => {
 
 export async function getCityInfo(city) {
   const weatherData = await getWeather(city);
-  const forecastDaysArr = Array.from(weatherData.forecast.forecastday);
-  events.emit(
-    "newCitySearched",
-    createUsefulDataArr(forecastDaysArr, weatherData.location.name),
-  );
+  const cleanedData = createUsefulDataArr(weatherData);
+  events.emit("newCitySearched", cleanedData);
 }
 
 function checkInput() {
@@ -45,12 +43,24 @@ async function getWeather(location) {
   }
 }
 
-function createUsefulDataArr(arr, cityName) {
+function createUsefulDataArr(data) {
+  const locationData = data.location;
+  const date = data.location.localtime;
+  const dateParsed = parse(date, "yyyy-MM-dd HH:mm", new Date());
+  const formattedLocalTime = format(dateParsed, "h:mm a");
+  const forecastDaysArr = Array.from(data.forecast.forecastday);
+
   let dataArr = [];
-  arr.forEach((item) => {
+  forecastDaysArr.forEach((item) => {
+    const localDate = item.date;
+    const parsedLocalDate = parse(localDate, "yyyy-MM-dd", new Date());
+    const formattedDate = format(parsedLocalDate, "EEEE, do MMM ''yy");
+
     let newObj = {
-      city: cityName,
-      date: item.date,
+      country: locationData.country,
+      city: locationData.name,
+      localTimeFormatted: formattedLocalTime,
+      dateFormatted: formattedDate,
       avgTempC: item.day.avgtemp_c,
       avgTempF: item.day.avgtemp_f,
       maxTempC: item.day.maxtemp_c,

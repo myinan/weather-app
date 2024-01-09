@@ -1,0 +1,4 @@
+.top-left-container {
+  display: flex;
+  flex-direction: column;
+}

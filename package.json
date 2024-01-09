@@ -1,5 +1,5 @@
 {
-  "name": "js-template-repo",
+  "name": "@myinan/weather-application",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -31,5 +31,8 @@
     "webpack-cli": "",
     "webpack-dev-server": "",
     "webpack-merge": ""
+  },
+  "dependencies": {
+    "date-fns": "^3.2.0"
   }
 }
