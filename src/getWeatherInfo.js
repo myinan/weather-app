@@ -54,13 +54,15 @@ function createUsefulDataArr(data) {
   forecastDaysArr.forEach((item) => {
     const localDate = item.date;
     const parsedLocalDate = parse(localDate, "yyyy-MM-dd", new Date());
+    const formattedDay = format(parsedLocalDate, "EEEE");
     const formattedDate = format(parsedLocalDate, "EEEE, do MMM ''yy");
 
     let newObj = {
       country: locationData.country,
       city: locationData.name,
-      localTimeFormatted: formattedLocalTime,
       dateFormatted: formattedDate,
+      localTimeFormatted: formattedLocalTime,
+      dayFormatted: formattedDay,
       avgTempC: item.day.avgtemp_c,
       avgTempF: item.day.avgtemp_f,
       maxTempC: item.day.maxtemp_c,
@@ -68,8 +70,12 @@ function createUsefulDataArr(data) {
       minTempC: item.day.mintemp_c,
       minTempF: item.day.mintemp_f,
       condition: item.day.condition.text,
+      conditionIconUrl: item.day.condition.icon,
       chanceOfRain: item.day.daily_chance_of_rain,
       chanceOfSnow: item.day.daily_chance_of_snow,
+      humidity: item.day.avghumidity,
+      maxWindKph: item.day.maxwind_kph,
+      maxWindMph: item.day.maxwind_mph,
     };
     dataArr.push(newObj);
   });

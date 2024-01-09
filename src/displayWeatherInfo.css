@@ -1,5 +1,23 @@
-.top-left-container {
+.top-left-container,
+.top-right-container {
   display: flex;
   flex-direction: column;
   color: var(--text);
+}
+
+.main-bottom-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-bottom-container .item {
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+}
+
+.condition-icon {
+  width: 64px;
+  height: 64px;
 }
