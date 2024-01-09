@@ -5,11 +5,13 @@ const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const errorText = document.querySelector(".error-text");
 
-searchBtn.addEventListener("click", getCityInfo);
-
-async function getCityInfo() {
+searchBtn.addEventListener("click", () => {
   if (!checkInput()) return;
-  const weatherData = await getWeather(searchInput.value);
+  getCityInfo(searchInput.value);
+});
+
+export async function getCityInfo(city) {
+  const weatherData = await getWeather(city);
   const forecastDaysArr = Array.from(weatherData.forecast.forecastday);
   events.emit(
     "newCitySearched",
@@ -27,9 +29,13 @@ function checkInput() {
 }
 
 async function getWeather(location) {
+  const BASE_URL = "http://api.weatherapi.com/v1";
+  const API_METHOD = "/forecast.json";
+  const API_KEY = "d5756cd98907479bb82210421240601";
+  const DAYS = 3;
   try {
     const responseForecast = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=d5756cd98907479bb82210421240601&q=${location}&days=3`,
+      `${BASE_URL}${API_METHOD}?key=${API_KEY}&q=${location}&days=${DAYS}`,
       { mode: "cors" },
     );
     const forecastData = await responseForecast.json();

@@ -7,6 +7,7 @@
   --main-bg: #111827;
   --text: #ffffff;
   --btn-hover-bg: #d1d5db;
+  --error-bg: red;
 }
 
 body {
@@ -32,12 +33,6 @@ body {
 .main-top-container {
   display: grid;
   grid-template-columns: 1.5fr 2fr 1.5fr;
-}
-
-.top-center-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .footer-container {
