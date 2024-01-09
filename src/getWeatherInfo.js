@@ -8,14 +8,19 @@ const errorText = document.querySelector(".error-text");
 
 searchBtn.addEventListener("click", () => {
   if (!checkInput()) return;
-  getCityInfo(searchInput.value);
+
+  const selectedTemp = document.querySelector(
+    'input[name="radio"]:checked',
+  ).value;
+  getCityInfo(searchInput.value, selectedTemp);
+  searchInput.value = "";
 });
 
-export async function getCityInfo(city) {
+export async function getCityInfo(city, temperature) {
   showLoading();
   try {
     const weatherData = await getWeather(city);
-    const cleanedData = createUsefulDataArr(weatherData);
+    const cleanedData = createUsefulDataArr(weatherData, temperature);
     events.emit("newCitySearched", cleanedData);
   } catch (err) {
     console.log(err);
@@ -62,7 +67,7 @@ async function getWeather(location) {
   }
 }
 
-function createUsefulDataArr(data) {
+function createUsefulDataArr(data, temperature) {
   const locationData = data.location;
   const date = data.location.localtime;
   const dateParsed = parse(date, "yyyy-MM-dd HH:mm", new Date());
@@ -77,6 +82,7 @@ function createUsefulDataArr(data) {
     const formattedDate = format(parsedLocalDate, "EEEE, do MMM ''yy");
 
     let newObj = {
+      temperature: temperature,
       country: locationData.country,
       city: locationData.name,
       dateFormatted: formattedDate,

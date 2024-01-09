@@ -43,8 +43,11 @@ function renderToLeft(data) {
   cityLeft.textContent = `${data[0].city}, ${data[0].country}`;
   dateLeft.textContent = data[0].dateFormatted;
   localTimeLeft.textContent = data[0].localTimeFormatted;
-  tempLeft.textContent = `${data[0].avgTempC} °C`;
   conditionIconLeft.src = data[0].conditionIconUrl;
+
+  data[0].temperature === "fahrenheit"
+    ? (tempLeft.textContent = `${data[0].avgTempF} °F`)
+    : (tempLeft.textContent = `${data[0].avgTempC} °C`);
 }
 
 // Render to main-top-right
@@ -53,6 +56,10 @@ function renderToRight(data) {
   rainRight.textContent = `Chance of rain: ${data[0].chanceOfRain}%`;
   snowRight.textContent = `Chance of snow: ${data[0].chanceOfSnow}%`;
   windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`;
+
+  data[0].temperature === "fahrenheit"
+    ? (windRight.textContent = `Wind speed: ${data[0].maxWindMph} mph`)
+    : (windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`);
 }
 
 // Render to main-bottom
@@ -66,13 +73,21 @@ function renderToBottom(data) {
     firstRow.textContent = item.dayFormatted;
 
     const secondRow = document.createElement("div");
-    secondRow.textContent = `${item.avgTempC} °C`;
+    item.temperature === "fahrenheit"
+      ? (secondRow.textContent = `${item.avgTempF} °F`)
+      : (secondRow.textContent = `${item.avgTempC} °C`);
 
     const thirdRow = document.createElement("div");
     const thirdRowFirstTemp = document.createElement("div");
-    thirdRowFirstTemp.textContent = `${item.minTempC} °C`;
+    item.temperature === "fahrenheit"
+      ? (thirdRowFirstTemp.textContent = `${item.minTempF} °F`)
+      : (thirdRowFirstTemp.textContent = `${item.minTempC} °C`);
+
     const thirdRowSecondTemp = document.createElement("div");
-    thirdRowSecondTemp.textContent = `${item.maxTempC} °C`;
+    item.temperature === "fahrenheit"
+      ? (thirdRowSecondTemp.textContent = `${item.maxTempF} °F`)
+      : (thirdRowSecondTemp.textContent = `${item.maxTempC} °C`);
+
     thirdRow.append(thirdRowFirstTemp, thirdRowSecondTemp);
 
     const fourthRow = document.createElement("img");
