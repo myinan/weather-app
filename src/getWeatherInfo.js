@@ -20,9 +20,11 @@ export async function getCityInfo(city) {
   } catch (err) {
     console.log(err);
   } finally {
-    setTimeout(() => {
+    /*     setTimeout(() => {
       hideLoading();
-    }, 1500);
+    }, 1500); */
+
+    hideLoading();
   }
 }
 
