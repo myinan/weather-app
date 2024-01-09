@@ -6,12 +6,33 @@
   <title>Weather App</title>
 </head>
 <body>
-  <form>
-    <div>
-      <input type="search" id="search-input" placeholder="Enter city name">
-      <button type="button" id="search-btn">Search</button>
+  <div class="header-container">Weather App</div>
+
+  <div class="main-container">
+    <div class="main-top-container">
+      <div class="top-left-container">
+
+      </div>
+      <div class="top-center-container">
+        <form class="search-form" autocomplete="off">
+          <div class="search-box">
+            <input type="search" id="search-input" placeholder="Enter city name">
+            <button type="button" id="search-btn">Search</button>
+          </div>
+          <span class="error-text display-none">Please enter a city name.</span>
+        </form>
+      </div>
+      <div class="top-right-container">
+
+      </div>
     </div>
-    <span class="error-text display-none">Please enter a city name.</span>
-  </form>
+
+    <div class="main-bottom-container">
+
+    </div>
+  </div>
+
+  <div class="footer-container"></div>
+  
 </body>
 </html>
