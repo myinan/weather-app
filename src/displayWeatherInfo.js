@@ -57,15 +57,28 @@ function renderToRight(data) {
 
 // Render to main-bottom
 function renderToBottom(data) {
+  mainBottomContainer.textContent = "";
   data.forEach((item) => {
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("item");
-    newDiv.append(
-      item.dayFormatted,
-      item.minTempC,
-      item.avgTempC,
-      item.maxTempC,
-    );
-    mainBottomContainer.append(newDiv);
+    const containerDiv = document.createElement("div");
+    containerDiv.classList.add("item");
+
+    const firstRow = document.createElement("div");
+    firstRow.textContent = item.dayFormatted;
+
+    const secondRow = document.createElement("div");
+    secondRow.textContent = `${item.avgTempC} °C`;
+
+    const thirdRow = document.createElement("div");
+    const thirdRowFirstTemp = document.createElement("div");
+    thirdRowFirstTemp.textContent = `${item.minTempC} °C`;
+    const thirdRowSecondTemp = document.createElement("div");
+    thirdRowSecondTemp.textContent = `${item.maxTempC} °C`;
+    thirdRow.append(thirdRowFirstTemp, thirdRowSecondTemp);
+
+    const fourthRow = document.createElement("img");
+    fourthRow.src = item.conditionIconUrl;
+
+    containerDiv.append(firstRow, secondRow, thirdRow, fourthRow);
+    mainBottomContainer.append(containerDiv);
   });
 }

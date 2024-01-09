@@ -17,6 +17,10 @@
   color: var(--text);
 }
 
+.main-bottom-container .item > div:nth-child(3) {
+  display: flex;
+}
+
 .condition-icon {
   width: 64px;
   height: 64px;
