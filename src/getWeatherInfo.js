@@ -25,11 +25,9 @@ export async function getCityInfo(city, temperature) {
   } catch (err) {
     console.log(err);
   } finally {
-    /*     setTimeout(() => {
+    setTimeout(() => {
       hideLoading();
-    }, 1500); */
-
-    hideLoading();
+    }, 1000);
   }
 }
 

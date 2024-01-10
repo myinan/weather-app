@@ -6,6 +6,9 @@ import humiditySVG from "./assets/humidity.svg";
 import snowSVG from "./assets/snow.svg";
 import rainSVG from "./assets/rain.svg";
 
+// Get reference to body to change bg
+const bodyElement = document.querySelector("body");
+
 // Get references to top left container, inner container elements
 const conditionLeft = document.querySelector(
   ".top-left-container > .condition",
@@ -21,13 +24,6 @@ const conditionIconLeft = document.querySelector(
 );
 
 // Get references to top right container, inner container elements
-const humidityRight = document.querySelector(
-  ".top-right-container > .humidity",
-);
-const rainRight = document.querySelector(".top-right-container > .rain-chance");
-const snowRight = document.querySelector(".top-right-container > .snow-chance");
-const windRight = document.querySelector(".top-right-container > .wind-speed");
-
 const humidityIcon = document.querySelector(".humidity .icon");
 const humidityHeading = document.querySelector(".humidity .heading");
 const humidityValue = document.querySelector(".humidity .value");
@@ -48,11 +44,24 @@ const windValue = document.querySelector(".wind-speed .value");
 const mainBottomContainer = document.querySelector(".main-bottom-container");
 
 events.on("newCitySearched", (weatherData) => {
+  renderMainBg(weatherData);
   renderToLeft(weatherData);
   renderToRight(weatherData);
   renderToBottom(weatherData);
 });
 
+// Render the main-container bg color according to temperature
+function renderMainBg(data) {
+  bodyElement.classList.remove(...bodyElement.classList);
+
+  if (data[0].avgTempC < 10) {
+    bodyElement.classList.add("bg-cold");
+  } else if (data[0].avgTempC > 10 && data[0].avgTempC < 25) {
+    bodyElement.classList.add("bg-warm");
+  } else if (data[0].avgTempC > 25) {
+    bodyElement.classList.add("bg-hot");
+  }
+}
 // Render to main-top-left
 function renderToLeft(data) {
   conditionLeft.textContent = data[0].condition;
@@ -68,15 +77,6 @@ function renderToLeft(data) {
 
 // Render to main-top-right
 function renderToRight(data) {
-  /*   humidityRight.textContent = `Humidity:${data[0].humidity}%`;
-  rainRight.textContent = `Chance of rain: ${data[0].chanceOfRain}%`;
-  snowRight.textContent = `Chance of snow: ${data[0].chanceOfSnow}%`;
-  windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`;
-
-  data[0].temperature === "fahrenheit"
-    ? (windRight.textContent = `Wind speed: ${data[0].maxWindMph} mph`)
-    : (windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`); */
-
   humidityIcon.innerHTML = humiditySVG;
   humidityHeading.textContent = "Humidity";
   humidityValue.textContent = `${data[0].humidity}%`;

@@ -1,3 +1,16 @@
+.bg-cold {
+  background-color: #0093e9;
+  background-image: linear-gradient(90deg, #0093e9 0%, #80d0c7 100%);
+}
+
+.bg-warm {
+  background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+}
+
+.bg-hot {
+  background-image: linear-gradient(135deg, #fd6e6a 10%, #ffc600 100%);
+}
+
 .top-left-container,
 .top-right-container {
   display: flex;
@@ -79,6 +92,7 @@
   flex-direction: column;
   justify-content: center;
   color: var(--text);
+  margin-bottom: 10px;
 }
 
 .item > * {
