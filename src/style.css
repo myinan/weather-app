@@ -10,8 +10,12 @@
   --error-bg: red;
 }
 
+html {
+  font-size: calc(8px + 0.4vw);
+}
+
 body {
-  height: 100svh;
+  height: 100vh;
   display: grid;
   grid-template-rows: 1fr 10fr 1fr;
 }
@@ -32,7 +36,7 @@ body {
 
 .main-top-container {
   display: grid;
-  grid-template-columns: 1.5fr 2fr 1.5fr;
+  grid-template-columns: 1.5fr minmax(100px, 2fr) 1.5fr;
 }
 
 .footer-container {

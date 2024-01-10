@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-size: 2rem;
   color: var(--text);
 }
 
@@ -23,6 +23,7 @@
 
 .search-box > input {
   flex-grow: 1;
+  flex-shrink: 1;
   border: none;
   background-color: rgba(0, 0, 0, 0);
   color: inherit;
@@ -63,11 +64,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
-.checkbox-container label:nth-child(3) {
-  margin-right: auto;
+.radios-container {
+  display: flex;
+  gap: 20px;
 }
 
 /* Customize the label (the container) */

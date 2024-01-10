@@ -27,15 +27,10 @@ const windRight = document.querySelector(".top-right-container > .wind-speed");
 const mainBottomContainer = document.querySelector(".main-bottom-container");
 
 events.on("newCitySearched", (weatherData) => {
-  loginfo(weatherData);
   renderToLeft(weatherData);
   renderToRight(weatherData);
   renderToBottom(weatherData);
 });
-
-function loginfo(data) {
-  console.log(data);
-}
 
 // Render to main-top-left
 function renderToLeft(data) {

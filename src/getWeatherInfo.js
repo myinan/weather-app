@@ -58,7 +58,6 @@ async function getWeather(location) {
   try {
     const responseForecast = await fetch(
       `${BASE_URL}${API_METHOD}?key=${API_KEY}&q=${location}&days=${DAYS}`,
-      { mode: "cors" },
     );
     const forecastData = await responseForecast.json();
     return forecastData;
