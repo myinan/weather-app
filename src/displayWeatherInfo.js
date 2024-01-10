@@ -1,6 +1,11 @@
 import "./displayWeatherInfo.css";
 import { events } from "./events";
 
+import windSVG from "./assets/wind.svg";
+import humiditySVG from "./assets/humidity.svg";
+import snowSVG from "./assets/snow.svg";
+import rainSVG from "./assets/rain.svg";
+
 // Get references to top left container, inner container elements
 const conditionLeft = document.querySelector(
   ".top-left-container > .condition",
@@ -22,6 +27,22 @@ const humidityRight = document.querySelector(
 const rainRight = document.querySelector(".top-right-container > .rain-chance");
 const snowRight = document.querySelector(".top-right-container > .snow-chance");
 const windRight = document.querySelector(".top-right-container > .wind-speed");
+
+const humidityIcon = document.querySelector(".humidity .icon");
+const humidityHeading = document.querySelector(".humidity .heading");
+const humidityValue = document.querySelector(".humidity .value");
+
+const rainIcon = document.querySelector(".rain-chance .icon");
+const rainHeading = document.querySelector(".rain-chance .heading");
+const rainValue = document.querySelector(".rain-chance .value");
+
+const snowIcon = document.querySelector(".snow-chance .icon");
+const snowHeading = document.querySelector(".snow-chance .heading");
+const snowValue = document.querySelector(".snow-chance .value");
+
+const windIcon = document.querySelector(".wind-speed .icon");
+const windHeading = document.querySelector(".wind-speed .heading");
+const windValue = document.querySelector(".wind-speed .value");
 
 // Get reference to main bottom container
 const mainBottomContainer = document.querySelector(".main-bottom-container");
@@ -47,14 +68,32 @@ function renderToLeft(data) {
 
 // Render to main-top-right
 function renderToRight(data) {
-  humidityRight.textContent = `Humidity: ${data[0].humidity}%`;
+  /*   humidityRight.textContent = `Humidity:${data[0].humidity}%`;
   rainRight.textContent = `Chance of rain: ${data[0].chanceOfRain}%`;
   snowRight.textContent = `Chance of snow: ${data[0].chanceOfSnow}%`;
   windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`;
 
   data[0].temperature === "fahrenheit"
     ? (windRight.textContent = `Wind speed: ${data[0].maxWindMph} mph`)
-    : (windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`);
+    : (windRight.textContent = `Wind speed: ${data[0].maxWindKph} km/h`); */
+
+  humidityIcon.innerHTML = humiditySVG;
+  humidityHeading.textContent = "Humidity";
+  humidityValue.textContent = `${data[0].humidity}%`;
+
+  rainIcon.innerHTML = rainSVG;
+  rainHeading.textContent = "Rain chance";
+  rainValue.textContent = `${data[0].chanceOfRain}%`;
+
+  snowIcon.innerHTML = snowSVG;
+  snowHeading.textContent = "Snow chance";
+  snowValue.textContent = `${data[0].chanceOfSnow}%`;
+
+  windIcon.innerHTML = windSVG;
+  windHeading.textContent = "Wind speed";
+  data[0].temperature === "fahrenheit"
+    ? (windValue.textContent = `${data[0].maxWindMph} mph`)
+    : (windValue.textContent = `${data[0].maxWindKph} km/h`);
 }
 
 // Render to main-bottom

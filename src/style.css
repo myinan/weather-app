@@ -15,9 +15,9 @@ html {
 }
 
 body {
-  height: 100vh;
+  min-height: 100svh;
   display: grid;
-  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-rows: 1fr 8fr 1fr;
 }
 
 .header-container {
