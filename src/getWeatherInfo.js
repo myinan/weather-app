@@ -49,7 +49,7 @@ function hideLoading() {
 }
 
 async function getWeather(location) {
-  const BASE_URL = "http://api.weatherapi.com/v1";
+  const BASE_URL = "https://api.weatherapi.com/v1";
   const API_METHOD = "/forecast.json";
   const API_KEY = "d5756cd98907479bb82210421240601";
   const DAYS = 3;
