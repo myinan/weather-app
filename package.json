@@ -33,6 +33,6 @@
     "webpack-merge": ""
   },
   "dependencies": {
-    "date-fns": "^3.2.0"
+    "date-fns": ""
   }
 }
